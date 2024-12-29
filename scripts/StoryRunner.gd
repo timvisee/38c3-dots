@@ -29,7 +29,10 @@ func _process(_delta):
 	frame = 0;
 	
 	if self.story != null:
-		self.story._frame(_delta);
+		if self.story.has_method("_frame"):
+			self.story._frame(_delta);
+		else:
+			print("Story does not have _frame function");
 
 
 func _input(event):
@@ -47,6 +50,7 @@ func next_story():
 	var script;
 	if self.single_story == null:
 		var path = self.story_files[0];
+		print("Loading story ", path);
 		self.story_files.push_back(self.story_files.pop_front());
 		script = load(path).new();
 	else:
@@ -60,7 +64,8 @@ func next_story():
 	self.story.grid = self.grid;
 	self.story.width = self.grid.WIDTH;
 	self.story.height = self.grid.HEIGHT;
-	self.story._start();
+	if self.story.has_method("_start"):
+		self.story._start();
 
 
 func load_stories():
