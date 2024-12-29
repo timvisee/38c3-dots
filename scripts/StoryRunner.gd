@@ -6,6 +6,8 @@ const STORY_INTERVAL_MSEC = 3 * 1000;
 
 @onready var grid = $"../Center/Margin/Grid";
 
+@export var single_story: Script = null;
+
 var story = null;
 var story_files = [];
 var story_start = 0;
@@ -34,10 +36,15 @@ func next_story():
 	if self.story_files.is_empty():
 		print("No stories found");
 		return;
-		
-	var path = self.story_files[0];
-	self.story_files.push_back(self.story_files.pop_front());
-	var script = load(path).new();
+	
+	# Load next story, or configured single story
+	var script;
+	if self.single_story == null:
+		var path = self.story_files[0];
+		self.story_files.push_back(self.story_files.pop_front());
+		script = load(path).new();
+	else:
+		script = self.single_story.new();
 	
 	if self.story != null:
 		self.story.queue_free();
