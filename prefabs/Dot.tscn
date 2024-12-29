@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://uhxo841igolx" path="res://sprites/dot.png" id="1_gycrn"]
 
 [node name="Dot" type="TextureRect"]
-custom_minimum_size = Vector2(8, 8)
+custom_minimum_size = Vector2(10, 10)
 offset_right = 10.0
 offset_bottom = 10.0
 size_flags_horizontal = 4

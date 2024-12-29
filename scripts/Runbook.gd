@@ -8,7 +8,7 @@ extends Node
 
 var frame = 0;
 var last = 0;
-func _process(delta):
+func _process(_delta):
 	frame += 1;
 	if frame < 5:
 		return;
@@ -24,4 +24,9 @@ func _process(delta):
 
 func set_pix(i: int, enabled: bool):
 	for x in range(width):
-		grid.set_dot(x, i - x, enabled);
+		var y = i - x;
+		if y >= height:
+			continue;
+		if x >= width:
+			continue;
+		grid.set_dot(x, y, enabled);
