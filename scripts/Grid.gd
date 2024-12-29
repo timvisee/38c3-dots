@@ -11,6 +11,8 @@ const OFFSET_MOVE = 5.0;
 var padding = 10.0;
 var offset = Vector2.ZERO;
 
+var dots = [];
+
 
 func _ready():
 	self.columns = WIDTH;
@@ -22,8 +24,20 @@ func _ready():
 	for i in WIDTH * HEIGHT:
 		var dot = PREFAB_DOT.instantiate();
 		self.add_child(dot);
+		dots.append(dot);
 	
 	self.relayout();
+	
+
+var last = 0;
+func _process(delta):
+	set_dot_i(last, false);
+	set_dot_i(last - 1, true);
+	if last == 0:
+		set_dot_i(last - 1, true);
+	else:
+		set_dot_i(WIDTH * HEIGHT - 1, true);
+	last = (last + 1) % (WIDTH * HEIGHT);
 	
 
 func _input(event):
@@ -34,19 +48,56 @@ func _input(event):
 		self.padding -= 1.0;
 		self.relayout();
 		
-	if event.is_action("ui_up"):
+	if event.is_action_pressed("ui_up"):
 		self.offset += OFFSET_MOVE * Vector2.UP;
 		self.relayout();
-	if event.is_action("ui_down"):
+	if event.is_action_pressed("ui_down"):
 		self.offset += OFFSET_MOVE * Vector2.DOWN;
 		self.relayout();
-	if event.is_action("ui_left"):
+	if event.is_action_pressed("ui_left"):
 		self.offset += OFFSET_MOVE * Vector2.LEFT;
 		self.relayout();
-	if event.is_action("ui_right"):
+	if event.is_action_pressed("ui_right"):
 		self.offset += OFFSET_MOVE * Vector2.RIGHT;
 		self.relayout();
+		
+	if event.is_action_pressed("ui_accept"):
+		for dot in dots:
+			if randi_range(0, 2) == 0:
+				dot.modulate = Color(1, 1, 1, 0);
+			else:
+				dot.modulate = Color(1, 1, 1, 1);
 
+
+func xy_to_i(x: int, y: int) -> int:
+	return y * WIDTH + x;
+	
+	
+func get_dot(x: int, y: int) -> bool:
+	return self.get_dot_i(xy_to_i(x, y));
+	
+	
+func get_dot_i(i: int) -> bool:
+	if i < 0 || i >= WIDTH * HEIGHT:
+		print("dot index out of bound");
+		return false;
+	return dots[i].modulate.a > 0;
+
+
+func set_dot(x: int, y: int, enabled: bool) -> void:
+	self.set_dot_i(xy_to_i(x, y), enabled);
+
+
+func set_dot_i(i: int, enabled: bool) -> void:
+	if i < 0 || i >= WIDTH * HEIGHT:
+		print("dot index out of bound");
+		return;
+	
+	if enabled:
+		dots[i].modulate = Color(1, 1, 1, 1);
+	else:
+		dots[i].modulate = Color(1, 1, 1, 0);
+	
 
 func relayout():
 	self.add_theme_constant_override("h_separation", self.padding);
