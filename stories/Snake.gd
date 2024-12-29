@@ -38,8 +38,8 @@ func _frame(frame):
 		return;
 	
 	if auto:
-		if (frame + 1) % 20 == 0:
-			enlarge += 1;
+		if (frame + 1) % 25 == 0:
+			enlarge += 2;
 		
 		if randf() <= 0.08:
 			if randf() <= 0.5:
