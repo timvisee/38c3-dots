@@ -1,15 +1,15 @@
 extends Node
 
-
-@onready var grid = $"../Center/Margin/Grid";
-@onready var width = grid.WIDTH;
-@onready var height = grid.HEIGHT;
-
 const STORIES_PATH = "res://stories";
 const STORIES_EXTENSION = "gd";
+const STORY_INTERVAL_MSEC = 3 * 1000;
+
+@onready var grid = $"../Center/Margin/Grid";
 
 var story = null;
 var story_files = [];
+var story_start = 0;
+
 
 func _ready():
 	var stories = load_stories();
@@ -17,8 +17,10 @@ func _ready():
 
 
 var frame = 0;
-var last = 0;
 func _process(_delta):
+	if Time.get_ticks_msec() - self.story_start > STORY_INTERVAL_MSEC:
+		self.next_story();
+	
 	frame += 1;
 	if frame < 5:
 		return;
@@ -34,11 +36,13 @@ func next_story():
 		return;
 		
 	var path = self.story_files[0];
+	self.story_files.push_back(self.story_files.pop_front());
 	var script = load(path).new();
 	
 	if self.story != null:
 		self.story.queue_free();
 	self.story = script;
+	self.story_start = Time.get_ticks_msec();
 	
 	self.story.grid = self.grid;
 	self.story.width = self.grid.WIDTH;
