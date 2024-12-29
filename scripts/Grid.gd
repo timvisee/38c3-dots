@@ -73,19 +73,19 @@ func _input(event):
 		self.config_save();
 	
 	# Change position
-	if event.is_action("ui_up") && event.is_pressed():
+	if event.is_action("move_up") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.UP;
 		self.relayout();
 		self.config_save();
-	if event.is_action("ui_down") && event.is_pressed():
+	if event.is_action("move_down") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.DOWN;
 		self.relayout();
 		self.config_save();
-	if event.is_action("ui_left") && event.is_pressed():
+	if event.is_action("move_left") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.LEFT;
 		self.relayout();
 		self.config_save();
-	if event.is_action("ui_right") && event.is_pressed():
+	if event.is_action("move_right") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.RIGHT;
 		self.relayout();
 		self.config_save();

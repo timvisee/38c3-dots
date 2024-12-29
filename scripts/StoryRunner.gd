@@ -23,7 +23,10 @@ var frame = 0;
 var user_frame = 0;
 func _process(_delta):
 	if self.single_story == null:
-		if Time.get_ticks_msec() - self.story_start > STORY_INTERVAL_MSEC:
+		if self.story != null && self.story.has_method("_is_done"):
+			if story._is_done():
+				self.next_story();
+		elif Time.get_ticks_msec() - self.story_start > STORY_INTERVAL_MSEC:
 			self.next_story();
 	
 	frame += 1;
