@@ -10,6 +10,7 @@ var enlarge = 2;
 var dir = 0;
 
 var blink_dead = 0;
+var is_done = false;
 
 var fruit = Vector2(1, 1);
 
@@ -25,6 +26,7 @@ func _frame(frame):
 	if blink_dead > 0:
 		blink_dead -= 1;
 		if blink_dead == 0:
+			self.is_done = true;
 			_start();
 			return;
 		elif blink_dead % 2 == 1:
@@ -65,6 +67,10 @@ func _frame(frame):
 		enlarge -= 1;
 		
 	draw(frame);
+
+
+func _is_done() -> bool:
+	return self.is_done;
 
 
 func wrap_pos(pos: Vector2) -> Vector2:
