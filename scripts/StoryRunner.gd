@@ -19,6 +19,7 @@ func _ready():
 
 
 var frame = 0;
+var user_frame = 0;
 func _process(_delta):
 	if Time.get_ticks_msec() - self.story_start > STORY_INTERVAL_MSEC:
 		self.next_story();
@@ -30,9 +31,11 @@ func _process(_delta):
 	
 	if self.story != null:
 		if self.story.has_method("_frame"):
-			self.story._frame(_delta);
+			self.story._frame(user_frame);
 		else:
 			print("Story does not have _frame function");
+			
+	user_frame += 1;
 
 
 func _input(event):

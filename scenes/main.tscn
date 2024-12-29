@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bobjitdj8o1x"]
+[gd_scene load_steps=6 format=3 uid="uid://bobjitdj8o1x"]
 
 [ext_resource type="Script" path="res://scripts/Grid.gd" id="1_qybds"]
 [ext_resource type="PackedScene" uid="uid://ecsubqftckxq" path="res://prefabs/Dot.tscn" id="2_641y3"]
 [ext_resource type="Script" path="res://scripts/StoryRunner.gd" id="3_l4onm"]
+[ext_resource type="Script" path="res://stories/Snake.gd" id="4_73h65"]
 [ext_resource type="Script" path="res://scripts/WindowManager.gd" id="4_wtjsp"]
 
 [node name="Main" type="Control"]
