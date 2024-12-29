@@ -2,8 +2,8 @@ extends GridContainer
 
 @export var dot_prefab: Control;
 
-@export var WIDTH: int = 16;
-@export var HEIGHT: int = 16;
+@export var WIDTH: int = 32;
+@export var HEIGHT: int = 32;
 
 const PREFAB_DOT = preload("res://prefabs/Dot.tscn");
 const OFFSET_MOVE = 5.0;

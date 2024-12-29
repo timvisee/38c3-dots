@@ -1,7 +1,7 @@
 extends Node
 
 
-@onready var grid = $"../Container/Grid";
+@onready var grid = $"../Center/Grid";
 @onready var width = grid.WIDTH;
 @onready var height = grid.HEIGHT;
 
@@ -14,10 +14,14 @@ func _process(delta):
 		return;
 	frame = 0;
 	
-	grid.set_dot_i(last, false);
-	grid.set_dot_i(last - 1, true);
-	if last == 0:
-		grid.set_dot_i(last - 1, true);
-	else:
-		grid.set_dot_i(width * height - 1, true);
-	last = (last + 1) % (width * height);
+	set_pix(last, false);
+	set_pix(last - 1, true);
+	
+	last += 1;
+	if (last > (width + height)):
+		last = 0;
+		
+
+func set_pix(i: int, enabled: bool):
+	for x in range(width):
+		grid.set_dot(x, i - x, enabled);
