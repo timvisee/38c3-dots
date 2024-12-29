@@ -10,7 +10,7 @@ func _start():
 	draw(true);
 
 
-func _frame(_delta):
+func _frame(frame):
 	pass
 
 

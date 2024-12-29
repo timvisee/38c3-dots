@@ -14,7 +14,7 @@ func _start():
 
 
 var index = 0;
-func _frame(_delta):
+func _frame(frame):
 	line(index, true);
 	line(index - 1, false);
 	

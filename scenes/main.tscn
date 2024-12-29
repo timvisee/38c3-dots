@@ -54,6 +54,7 @@ layout_mode = 2
 
 [node name="StoryRunner" type="Node" parent="."]
 script = ExtResource("3_l4onm")
+single_story = ExtResource("4_73h65")
 
 [node name="WindowManager" type="Node" parent="."]
 script = ExtResource("4_wtjsp")

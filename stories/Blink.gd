@@ -11,7 +11,7 @@ func _start():
 
 
 var on = true;
-func _frame(_delta):
+func _frame(frame):
 	self.on = !self.on;
 	draw(self.on);
 		

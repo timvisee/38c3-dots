@@ -2,11 +2,12 @@ extends Node
 
 const STORIES_PATH = "res://stories";
 const STORIES_EXTENSION = "gd";
-const STORY_INTERVAL_MSEC = 3 * 1000;
+const STORY_INTERVAL_MSEC = 5 * 1000;
 
 @onready var grid = $"../Center/Margin/Grid";
 
 @export var single_story: Script = null;
+@export var interval_msec = STORY_INTERVAL_MSEC;
 
 var story = null;
 var story_files = [];
@@ -21,8 +22,9 @@ func _ready():
 var frame = 0;
 var user_frame = 0;
 func _process(_delta):
-	if Time.get_ticks_msec() - self.story_start > STORY_INTERVAL_MSEC:
-		self.next_story();
+	if self.single_story == null:
+		if Time.get_ticks_msec() - self.story_start > STORY_INTERVAL_MSEC:
+			self.next_story();
 	
 	frame += 1;
 	if frame < 5:
