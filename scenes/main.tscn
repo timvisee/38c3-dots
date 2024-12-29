@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Grid.gd" id="1_qybds"]
 [ext_resource type="PackedScene" uid="uid://ecsubqftckxq" path="res://prefabs/Dot.tscn" id="2_641y3"]
-[ext_resource type="Script" path="res://scripts/Runbook.gd" id="3_l4onm"]
+[ext_resource type="Script" path="res://scripts/StoryRunner.gd" id="3_l4onm"]
 [ext_resource type="Script" path="res://scripts/WindowManager.gd" id="4_wtjsp"]
 
 [node name="Main" type="Control"]
@@ -35,6 +35,7 @@ offset_right = 25.0
 offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Margin" type="MarginContainer" parent="Center"]
 layout_mode = 2
@@ -50,7 +51,7 @@ script = ExtResource("1_qybds")
 [node name="Dot" parent="Center/Margin/Grid" instance=ExtResource("2_641y3")]
 layout_mode = 2
 
-[node name="Runbook" type="Node" parent="."]
+[node name="StoryRunner" type="Node" parent="."]
 script = ExtResource("3_l4onm")
 
 [node name="WindowManager" type="Node" parent="."]
