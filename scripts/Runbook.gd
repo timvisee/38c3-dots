@@ -14,8 +14,8 @@ func _process(_delta):
 		return;
 	frame = 0;
 	
-	#set_pix(last, true);
-	#set_pix(last - 1, false);
+	set_pix(last, true);
+	set_pix(last - 1, false);
 	
 	last += 1;
 	if (last > (width + height)):
@@ -25,8 +25,6 @@ func _process(_delta):
 func set_pix(i: int, enabled: bool):
 	for x in range(width):
 		var y = i - x;
-		if y >= height:
-			continue;
-		if x >= width:
+		if x >= width || y < 0:
 			continue;
 		grid.set_dot(x, y, enabled);
