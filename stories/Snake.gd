@@ -84,7 +84,7 @@ func _frame(frame):
 	draw(frame);
 
 
-func _is_done() -> bool:
+func _is_done(_frame) -> bool:
 	return self.is_done;
 
 
