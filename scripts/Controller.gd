@@ -3,7 +3,9 @@ extends Node
 
 var fullscreen = false;
 
-#func _ready():
+func _ready():
+	get_window().grab_focus()
+	
 	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN);
 	#get_window().set_current_screen(0);
 

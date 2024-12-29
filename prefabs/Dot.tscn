@@ -9,4 +9,4 @@ offset_bottom = 10.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("1_gycrn")
-expand_mode = 3
+expand_mode = 1
