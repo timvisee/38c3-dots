@@ -3,6 +3,7 @@ extends Node
 const STORIES_PATH = "res://stories";
 const STORIES_EXTENSION = "gd";
 const STORY_INTERVAL_MSEC = 5 * 1000;
+const FPS = 4;
 
 @onready var grid = $"../Center/Margin/Grid";
 
@@ -12,6 +13,7 @@ const STORY_INTERVAL_MSEC = 5 * 1000;
 var story = null;
 var story_files = [];
 var story_start = 0;
+var story_fps = 0;
 
 
 func _ready():
@@ -30,7 +32,7 @@ func _process(_delta):
 			self.next_story();
 	
 	frame += 1;
-	if frame < 5:
+	if frame <= self.story_fps:
 		return;
 	frame = 0;
 	
@@ -68,8 +70,11 @@ func next_story():
 		self.story.queue_free();
 	self.story = script;
 	self.story_start = Time.get_ticks_msec();
-	
+	self.story_fps = FPS;
+	if self.story.has_method("_fps"):
+		self.story_fps = self.story._fps();
 	self.user_frame = 0;
+	
 	self.story.grid = self.grid;
 	self.story.width = self.grid.WIDTH;
 	self.story.height = self.grid.HEIGHT;

@@ -11,7 +11,7 @@ var midpoint = 10;
 func _start():
 	# Clear dots
 	midpoint = width / 2;
-	points = _get_points(midpoint, [9, 10 ,11 , 12], 1000);
+	points = get_points(midpoint, [9, 10 ,11 , 12], 1000);
 	for x in range(width):
 		for y in range(height):
 			grid.set_dot(x, y, false);
@@ -24,7 +24,7 @@ func _frame(frame):
 	var trail_percent = fposmod(frame/200.0, 1);
 	#print(trail_percent)
 	var trail = int(len(points)*trail_percent);
-	var speed = 250;
+	var speed = 50;
 
 	for s in range(speed):
 		grid.set_dot(points[index-trail][0], points[index-trail][1], false);
@@ -36,7 +36,11 @@ func _is_done(frame):
 	return frame >= 200;
 	
 	
-func _get_points(midpoint, radius, num_points):
+func _fps():
+	return 1;
+	
+	
+func get_points(midpoint, radius, num_points):
 	var points = [];
 	for i in range(num_points):
 		var angle = 2 * PI * i / num_points;
