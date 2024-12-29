@@ -24,7 +24,7 @@ var user_frame = 0;
 func _process(_delta):
 	if self.single_story == null:
 		if self.story != null && self.story.has_method("_is_done"):
-			if story._is_done(frame):
+			if story._is_done(user_frame):
 				self.next_story();
 		elif Time.get_ticks_msec() - self.story_start > STORY_INTERVAL_MSEC:
 			self.next_story();
@@ -69,6 +69,7 @@ func next_story():
 	self.story = script;
 	self.story_start = Time.get_ticks_msec();
 	
+	self.user_frame = 0;
 	self.story.grid = self.grid;
 	self.story.width = self.grid.WIDTH;
 	self.story.height = self.grid.HEIGHT;
