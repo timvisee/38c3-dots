@@ -1,7 +1,7 @@
 extends Node
 
 
-@onready var grid = $"../Center/Grid";
+@onready var grid = $"../Center/Margin/Grid";
 @onready var width = grid.WIDTH;
 @onready var height = grid.HEIGHT;
 

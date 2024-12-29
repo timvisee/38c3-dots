@@ -36,7 +36,10 @@ offset_bottom = 85.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Grid" type="GridContainer" parent="Center"]
+[node name="Margin" type="MarginContainer" parent="Center"]
+layout_mode = 2
+
+[node name="Grid" type="GridContainer" parent="Center/Margin"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4

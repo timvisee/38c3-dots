@@ -23,7 +23,6 @@ var dots = [];
 func _ready():
 	self.columns = WIDTH;
 	
-	# Remove dot shown in editor
 	$Dot.queue_free()
 	
 	# Add dots as configured
@@ -31,67 +30,68 @@ func _ready():
 		var dot = PREFAB_DOT.instantiate();
 		self.add_child(dot);
 		dots.append(dot);
+	self.queue_sort();
 	
 	self.config_load();
 
 
 func _input(event):
 	# Change padding
-	if event.is_action_pressed("padding_x_plus"):
+	if event.is_action("padding_x_plus") && event.is_pressed():
 		self.padding += Vector2(0.25, 0);
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("padding_x_min"):
+	if event.is_action("padding_x_min") && event.is_pressed():
 		self.padding -= Vector2(0.25, 0);
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("padding_y_plus"):
+	if event.is_action("padding_y_plus") && event.is_pressed():
 		self.padding += Vector2(0, 0.25);
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("padding_y_min"):
+	if event.is_action("padding_y_min") && event.is_pressed():
 		self.padding -= Vector2(0, 0.25);
 		self.relayout();
 		self.config_save();
 		
 	# Change size
-	if event.is_action_pressed("size_x_plus"):
+	if event.is_action("size_x_plus") && event.is_pressed():
 		self.dot_size += Vector2(0.25, 0);
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("size_x_min"):
+	if event.is_action("size_x_min") && event.is_pressed():
 		self.dot_size -= Vector2(0.25, 0);
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("size_y_plus"):
+	if event.is_action("size_y_plus") && event.is_pressed():
 		self.dot_size += Vector2(0, 0.25);
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("size_y_min"):
+	if event.is_action("size_y_min") && event.is_pressed():
 		self.dot_size -= Vector2(0, 0.25);
 		self.relayout();
 		self.config_save();
 	
 	# Change position
-	if event.is_action_pressed("ui_up"):
+	if event.is_action("ui_up") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.UP;
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("ui_down"):
+	if event.is_action("ui_down") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.DOWN;
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("ui_left"):
+	if event.is_action("ui_left") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.LEFT;
 		self.relayout();
 		self.config_save();
-	if event.is_action_pressed("ui_right"):
+	if event.is_action("ui_right") && event.is_pressed():
 		self.offset += OFFSET_MOVE * Vector2.RIGHT;
 		self.relayout();
 		self.config_save();
 	
 	# Other actions
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action("ui_accept") && event.is_pressed():
 		for i in range(WIDTH * HEIGHT):
 			set_dot_i(i, randi_range(0, 2) == 0);
 	if event.is_action_pressed("reset"):
@@ -130,15 +130,12 @@ func relayout():
 	for dot in self.dots:
 		dot.size = self.dot_size;
 		dot.custom_minimum_size = self.dot_size;
-	self.position = self.offset;
-
-
-func reset():
-	self.padding = DEFAULT_PADDING;
-	self.offset = DEFAULT_OFFSET;
-	self.dot_size = DEFAULT_DOT_SIZE;
-	self.config_save();
-	self.relayout();
+		
+	var margin = $"..";
+	margin.add_theme_constant_override("margin_left", max(self.offset.x, 0.0));
+	margin.add_theme_constant_override("margin_right", max(-self.offset.x, 0.0));
+	margin.add_theme_constant_override("margin_top", max(self.offset.y, 0.0));
+	margin.add_theme_constant_override("margin_bottom", max(-self.offset.y, 0.0));
 
 
 func config_load():
@@ -157,3 +154,11 @@ func config_save():
 	config.set_value("", "offset", self.offset);
 	config.set_value("", "dot_size", self.dot_size);
 	config.save(CONFIG_FILE);
+
+
+func reset():
+	self.padding = DEFAULT_PADDING;
+	self.offset = DEFAULT_OFFSET;
+	self.dot_size = DEFAULT_DOT_SIZE;
+	self.config_save();
+	self.relayout();
