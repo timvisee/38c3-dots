@@ -14,8 +14,8 @@ func _process(_delta):
 		return;
 	frame = 0;
 	
-	set_pix(last, false);
-	set_pix(last - 1, true);
+	#set_pix(last, true);
+	#set_pix(last - 1, false);
 	
 	last += 1;
 	if (last > (width + height)):

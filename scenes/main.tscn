@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/Grid.gd" id="1_qybds"]
 [ext_resource type="PackedScene" uid="uid://ecsubqftckxq" path="res://prefabs/Dot.tscn" id="2_641y3"]
 [ext_resource type="Script" path="res://scripts/Runbook.gd" id="3_l4onm"]
-[ext_resource type="Script" path="res://scripts/Controller.gd" id="4_wtjsp"]
+[ext_resource type="Script" path="res://scripts/WindowManager.gd" id="4_wtjsp"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -47,11 +47,11 @@ theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 script = ExtResource("1_qybds")
 
-[node name="Dot" parent="Center/Grid" instance=ExtResource("2_641y3")]
+[node name="Dot" parent="Center/Margin/Grid" instance=ExtResource("2_641y3")]
 layout_mode = 2
 
 [node name="Runbook" type="Node" parent="."]
 script = ExtResource("3_l4onm")
 
-[node name="Controller" type="Node" parent="."]
+[node name="WindowManager" type="Node" parent="."]
 script = ExtResource("4_wtjsp")
