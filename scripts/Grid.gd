@@ -33,11 +33,11 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("padding_plus"):
-		self.padding += 1.0;
+		self.padding += 0.25;
 		self.relayout();
 		self.config_save();
 	if event.is_action_pressed("padding_min"):
-		self.padding -= 1.0;
+		self.padding -= 0.25;
 		self.relayout();
 		self.config_save();
 	if event.is_action_pressed("size_plus"):
