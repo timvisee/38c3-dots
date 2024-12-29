@@ -32,6 +32,12 @@ func _process(_delta):
 		self.story._frame(_delta);
 
 
+func _input(event):
+	# Change padding
+	if event.is_action_pressed("story_next") :
+		self.next_story();
+
+
 func next_story():
 	if self.story_files.is_empty():
 		print("No stories found");

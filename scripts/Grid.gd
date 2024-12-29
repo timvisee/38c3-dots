@@ -91,7 +91,7 @@ func _input(event):
 		self.config_save();
 	
 	# Other actions
-	if event.is_action("ui_accept") && event.is_pressed():
+	if event.is_action("random_dots") && event.is_pressed():
 		for i in range(WIDTH * HEIGHT):
 			set_dot_i(i, randi_range(0, 2) == 0);
 	if event.is_action_pressed("reset"):
