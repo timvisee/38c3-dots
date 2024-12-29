@@ -41,11 +41,11 @@ func _input(event):
 		self.relayout();
 		self.config_save();
 	if event.is_action_pressed("size_plus"):
-		self.dot_size += 0.5;
+		self.dot_size += 0.25;
 		self.relayout();
 		self.config_save();
 	if event.is_action_pressed("size_min"):
-		self.dot_size -= 0.5;
+		self.dot_size -= 0.25;
 		self.relayout();
 		self.config_save();
 		
