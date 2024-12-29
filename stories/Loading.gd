@@ -22,7 +22,7 @@ var index = 0;
 func _frame(frame):
 	var lastframe = 0;
 	var trail_percent = fposmod(frame/1000.0, 1);
-	print(trail_percent)
+	#print(trail_percent)
 	var trail = int(len(points)*trail_percent);
 	var speed = 150;
 
@@ -30,6 +30,10 @@ func _frame(frame):
 		grid.set_dot(points[index-trail][0], points[index-trail][1], false);
 		grid.set_dot(points[index][0], points[index][1], true);
 		index = (index +1) % len(points);
+		
+
+func _is_done(frame):
+	return frame >= 1000;
 	
 	
 func _get_points(midpoint, radius, num_points):
