@@ -1,9 +1,9 @@
 extends GridContainer
 
-@export var dot_prefab: Control; 
+@export var dot_prefab: Control;
 
-@export var WIDTH: int = 5;
-@export var HEIGHT: int = 5;
+@export var WIDTH: int = 16;
+@export var HEIGHT: int = 16;
 
 const PREFAB_DOT = preload("res://prefabs/Dot.tscn");
 const OFFSET_MOVE = 5.0;
@@ -27,18 +27,7 @@ func _ready():
 		dots.append(dot);
 	
 	self.relayout();
-	
 
-var last = 0;
-func _process(delta):
-	set_dot_i(last, false);
-	set_dot_i(last - 1, true);
-	if last == 0:
-		set_dot_i(last - 1, true);
-	else:
-		set_dot_i(WIDTH * HEIGHT - 1, true);
-	last = (last + 1) % (WIDTH * HEIGHT);
-	
 
 func _input(event):
 	if event.is_action_pressed("padding_plus"):
@@ -62,11 +51,8 @@ func _input(event):
 		self.relayout();
 		
 	if event.is_action_pressed("ui_accept"):
-		for dot in dots:
-			if randi_range(0, 2) == 0:
-				dot.modulate = Color(1, 1, 1, 0);
-			else:
-				dot.modulate = Color(1, 1, 1, 1);
+		for i in range(WIDTH * HEIGHT):
+			set_dot_i(i, randi_range(0, 2) == 0);
 
 
 func xy_to_i(x: int, y: int) -> int:
@@ -92,11 +78,7 @@ func set_dot_i(i: int, enabled: bool) -> void:
 	if i < 0 || i >= WIDTH * HEIGHT:
 		print("dot index out of bound");
 		return;
-	
-	if enabled:
-		dots[i].modulate = Color(1, 1, 1, 1);
-	else:
-		dots[i].modulate = Color(1, 1, 1, 0);
+	dots[i].modulate = Color(1, 1, 1, float(enabled));
 	
 
 func relayout():
